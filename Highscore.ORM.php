@@ -44,7 +44,13 @@ class HighscoreORM
 			trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $this->_conn->error, E_USER_ERROR);
 			return array();
 		}
-		return $rs->fetch_all(MYSQLI_ASSOC);
+		$result = array();
+		
+		while($row = $rs->fetch_array())
+		{
+			$result[] = $row;
+		}
+		return $result;
 	}
 	
 	public function pushScoreForUser($id, $data, $compare)
