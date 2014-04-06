@@ -14,7 +14,7 @@ class HighscoreORM
 		$this->_conn->select_db($db['database']);
 		if ($this->_conn->connect_error) 
 		{
-			trigger_error('Database connection failed: '  . $conn->connect_error, E_USER_ERROR);
+			trigger_error('Database connection failed: '  . $this->_conn->connect_error, E_USER_ERROR);
 		}
     }
 

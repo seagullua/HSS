@@ -12,6 +12,7 @@ function prolongStr($a, $length)
 	return $a;
 }
 
+//Used to safely compare int64 on 32bit systems
 function isLess($a, $b)
 {
 	$size = max(strlen($a), strlen($b));
@@ -22,7 +23,7 @@ function isLess($a, $b)
 	return $a < $b;
 }
 
-$request = $_REQUEST["r"];
+$request = isset($_REQUEST["r"]) ? $_REQUEST["r"] : '';
 
 if($request == "get")
 {
@@ -68,12 +69,3 @@ else if($request == "push")
 	}
 	echo "OK";
 }
-
-
-
-
-
-//if(Facebook::isValidUser(1364926035, "CAAJp19HZBwBsBAN8L0ZBRNFTRYqSDDc3SdKZBAkQHFYavPh0XkMr0bUZCRpFhTSKYnQnmjrPUgBSuiqYZCkR1X2qAHWg77FJekRrGCtsbvQUd8XvezErS6uVxJOXE2U4nqCwgcQg4ufUmyOL71ITpTvJxKWB7ddGiBgMkoWQrCwDjXzWZCZCrNTN5qLBhqjNddftL7LC0iiCGR2ZAYVaW96x7bu7YepD05PPFbvHfLQmMAZDZD"))
-//echo "OK";
-//else
-//	echo "F";
