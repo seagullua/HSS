@@ -47,25 +47,27 @@ else if($request == "push")
 	$data = $_REQUEST['data'];
 	$compare = $_REQUEST['compare'];
 	
-	if(Facebook::isValidUser($id, $token))
+	
+	$orm = HighscoreORM::getInstance();
+	$info = $orm->getScoresForUsers(array($id));
+
+	$valid = true;
+	if(count($info) > 0)
+	{
+		$info = $info[0];
+		if(isLess((string)($compare), (string)($info['compare'])))
+			$valid = false;
+	}
+	
+	if($valid)
 	{
 		echo "*";
-		$orm = HighscoreORM::getInstance();
-		$info = $orm->getScoresForUsers(array($id));
-
-		$valid = true;
-		if(count($info) > 0)
-		{
-			$info = $info[0];
-			if(isLess((string)($compare), (string)($info['compare'])))
-				$valid = false;
-		}
-		
-		if($valid)
+		if(Facebook::isValidUser($id, $token))
 		{
 			$orm->pushScoreForUser($id, $data, $compare);
 			echo ".";
 		}
 	}
+	
 	echo "OK";
 }
