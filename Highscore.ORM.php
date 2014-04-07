@@ -25,19 +25,19 @@ class HighscoreORM
 	
 	public function getScoresForUsers($array)
 	{
+		
 		$query = '';
 		foreach($array as $val)
 		{
 			if($this->isInt($val))
 			{
 				if($query)
-					$query += ",";
-				$query += $val;
+					$query .= ",";
+				$query .= $val;
 			}
 		}
 		
 		$sql = "SELECT * FROM highscore WHERE `id` IN($query)";
-		
 		$rs = $this->_conn->query($sql);
 		if($rs === false)
 		{
